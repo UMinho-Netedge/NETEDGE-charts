@@ -1,0 +1,18 @@
+apiVersion: v1
+entries:
+netedge-mep:
+  - apiVersion: v1
+    description: A Helm Chart for NetEdge MEP, an ETSI compliant MEC Platform, developed by ALGORITMI Research Centre - UMinho
+    home: https://github.com/UMinho-Netedge/NetEdge-MEP
+    keywords:
+    - netedge
+    - mep
+    maintainers:
+    - email: viniciusferreira@id.uff.br
+      name: Vinicius Ferreira
+    name: netedge-mep
+    sources:
+    - https://github.com/UMinho-Netedge/NetEdge-MEP
+    urls:
+    - https://github.com/vinicf/netedge-charts/releases/download/netedge-mep-1.0.0/mep-1.0.0.tgz
+    version: 1.0.0
