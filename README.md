@@ -16,11 +16,19 @@ The micro-service architecture is:
 
 If you use it, please refer to: xxx
 
-## How-to
+# How to install
 
 You should first have a Kubernetes cluster configured and helm v3 installed to run it.
+The NetEdge MEP also res
 
+## Using it as a helm chart repository
 
+### Add as a helm repository
+```bash
+helm repo add netedge-mep https://uminho-netedge.github.io/NetEdge-MEP/
+```
+
+## Download e generate helm chart
 ### Create chart
 ```bash
 #In the current directory
