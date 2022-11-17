@@ -27,8 +27,13 @@ The NetEdge MEP also res
 ```bash
 helm repo add netedge-mep https://uminho-netedge.github.io/NetEdge-MEP/
 ```
+### Installing the chart
+```bash
+helm install netedge-mep/netedge-mep
+```
 
-## Download e generate helm chart
+
+## Download and generate helm chart
 ### Create chart
 ```bash
 #In the current directory
