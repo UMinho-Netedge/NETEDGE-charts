@@ -1,7 +1,9 @@
 # NetEdge-MEP
 The NetEdge-MEP is a CNF-based ETSI-MEC compliant MEP.
 
-The micro-service architecture is:
+NetEdge-MEP is part of NetEdge project, for more information on NetEdge, please check https://www.netedge.pt/
+
+The NetEdge-MEP micro-service architecture is composed of:
 
 - MEP Service: provides MEP functionalities for MEPM and MEC Apps, using the Mp1 and Mm5 interfaces.
   - Source-code: https://github.com/UMinho-Netedge/netedge-mep-uminho
