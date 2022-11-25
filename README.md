@@ -31,7 +31,7 @@ helm repo add netedge-mep https://uminho-netedge.github.io/NetEdge-MEP/
 ```
 ### Installing the chart
 ```bash
-helm install netedge-mep/netedge-mep
+helm install <chart-name> netedge-mep/netedge-mep
 ```
 
 
