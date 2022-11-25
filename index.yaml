@@ -6,7 +6,7 @@ entries:
     home: https://github.com/UMinho-Netedge/NetEdge-MEP
     keywords:
     - netedge
-    - mep
+      mep
     maintainers:
     - email: viniciusferreira@algoritmi.uminho.pt
       name: Vinicius Ferreira
