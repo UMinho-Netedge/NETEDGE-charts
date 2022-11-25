@@ -12,10 +12,12 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-name: mep
+apiVersion: v2
+name: netedge-mep
 description: A Helm Chart for ETSI MEC Platform developed by ALGORITMI Centre - UMinho
+type: application
 version: 0.0.1
-apiVersion: v1
+appVersion: 1.0.0
 keywords:
   - mep
 sources:
