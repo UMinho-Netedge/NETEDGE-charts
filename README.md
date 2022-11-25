@@ -1,7 +1,9 @@
 # NetEdge-MEP
 The NetEdge-MEP is a CNF-based ETSI-MEC compliant MEP.
 
-The micro-service architecture is:
+NetEdge-MEP is part of NetEdge project, for more information on NetEdge, please check https://www.netedge.pt/
+
+The NetEdge-MEP micro-service architecture is composed of:
 
 - MEP Service: provides MEP functionalities for MEPM and MEC Apps, using the Mp1 and Mm5 interfaces.
   - Source-code: https://github.com/UMinho-Netedge/netedge-mep-uminho
@@ -16,11 +18,24 @@ The micro-service architecture is:
 
 If you use it, please refer to: xxx
 
-## How-to
+# How to install
 
 You should first have a Kubernetes cluster configured and helm v3 installed to run it.
+The NetEdge MEP also res
+
+## Using it as a helm chart repository
+
+### Add as a helm repository
+```bash
+helm repo add netedge-mep https://uminho-netedge.github.io/NetEdge-MEP/
+```
+### Installing the chart
+```bash
+helm install netedge-mep/netedge-mep
+```
 
 
+## Download and generate helm chart
 ### Create chart
 ```bash
 #In the current directory
