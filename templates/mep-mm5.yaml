@@ -15,26 +15,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.mepserver.name }}-deployment
+  name: {{ .Values.mepconfig.name }}-deployment
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ .Values.mepserver.name }}
+    app: {{ .Values.mepconfig.name }}
 spec:
-  replicas: {{ .Values.mepserver.replicas }}
+  replicas: {{ .Values.mepconfig.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.mepserver.name }}
+      app: {{ .Values.mepconfig.name }}
   template:
     metadata:
       namespace: {{ .Values.namespace }}
       labels:
-        app: {{ .Values.mepserver.name }}
+        app: {{ .Values.mepconfig.name }}
     spec:
+      serviceAccountName: {{ .Values.mepconfig.name }}
+      automountServiceAccountToken: true
       containers:
-      - name: {{ .Values.mepserver.name }}
-        image: "{{ .Values.mepserver.image }}"
+      - name: {{ .Values.mepconfig.name }}
+        image: "{{ .Values.mepconfig.image }}"
         ports:
-        - containerPort: {{ .Values.mepserver.service.targetPort }}
+        - containerPort: {{ .Values.mepconfig.service.targetPort }}
         env:
           - name: ME_CONFIG_MONGODB_SERVER
             valueFrom:
@@ -88,19 +90,19 @@ status: {}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.mepserver.name }}-service
+  name: {{ .Values.mepconfig.name }}-service
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ .Values.mepserver.name }}
+    app: {{ .Values.mepconfig.name }}
 spec:
   selector:
-    app: {{ .Values.mepserver.name }}
+    app: {{ .Values.mepconfig.name }}
   ports:
-  - name: {{ .Values.mepserver.name }}
+  - name: {{ .Values.mepconfig.name }}
     protocol: TCP
-    port: {{ .Values.mepserver.service.port }}
-    targetPort: {{ .Values.mepserver.service.targetPort }}
-  type: {{ .Values.mepserver.service.type }}
+    port: {{ .Values.mepconfig.service.port }}
+    targetPort: {{ .Values.mepconfig.service.targetPort }}
+  type: {{ .Values.mepconfig.service.type }}
 
 ---
 
@@ -108,10 +110,10 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.mepserver.name }}-ingress
+  name: {{ .Values.mepconfig.name }}-ingress
   namespace: {{ .Values.namespace }}
   labels:
-    app.kubernetes.io/name: {{ .Values.mepserver.name }}
+    app.kubernetes.io/name: {{ .Values.mepconfig.name }}
     app.kubernetes.io/instance: {{ .Values.appInstanceId }}
 spec:
   rules:
@@ -121,7 +123,39 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Values.mepserver.name }}-service
+            name: {{ .Values.mepconfig.name }}-service
             port:
-              number: {{ .Values.mepserver.service.port }}
-    host: {{ .Values.mepserver.ingress.url }}
+              number: {{ .Values.mepconfig.service.port }}
+    host: {{ .Values.mepconfig.ingress.url }}
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.mepconfig.name }}
+  namespace: {{ .Values.namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Values.mepconfig.name }}-role
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get","list","watch","update","create", "delete"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["networkpolicies"]
+  verbs: ["get","list","watch","update","create","delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Values.mepconfig.name }}-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Values.mepconfig.name }}-role
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.mepconfig.name }}
+  namespace: {{ .Values.namespace }}

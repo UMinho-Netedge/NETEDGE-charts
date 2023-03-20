@@ -16,34 +16,34 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    mep.app: dns-api
+    app: {{ .Values.coredns.name }}
   name: coredns-deployment
-  namespace: mep
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      mep.app: coredns
+      app: {{ .Values.coredns.name }}
   template:
     metadata:
       labels:
-        mep.app: coredns
-      namespace: mep
+        app: {{ .Values.coredns.name }}
+      namespace: {{ .Values.namespace }}
     spec:
       containers:
-        - name: coredns
-          image: coredns/coredns:1.10.0
+        - name: {{ .Values.coredns.name }}
+          image: {{ .Values.coredns.image }}
           ports:
           - containerPort: 1053
             protocol: UDP
           volumeMounts:
-            - name: dns-storage
+            - name: {{ .Values.dnsapi.name }}-storage
               mountPath: /etc/coredns
           args: [ "-conf", "/etc/coredns/Corefile" ]
       volumes:
-        - name: dns-storage
+        - name: {{ .Values.dnsapi.name }}-storage
           persistentVolumeClaim:
-            claimName: dns-pvc
+            claimName: {{ .Values.dnsapi.name }}-pvc
       restartPolicy: Always
 
 ---
@@ -51,9 +51,9 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    mep.app: coredns
-  name: coredns-service
-  namespace: mep
+    app: {{ .Values.coredns.name }}
+  name: {{ .Values.coredns.name }}-service
+  namespace: {{ .Values.namespace }}
 spec:
   ports:
     - protocol: UDP
@@ -61,4 +61,4 @@ spec:
       targetPort: 1053
   type: LoadBalancer
   selector:
-    mep.app: coredns
+    app: {{ .Values.coredns.name }}

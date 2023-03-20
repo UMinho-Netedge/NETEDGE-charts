@@ -13,10 +13,6 @@
 #     limitations under the License.
 
 apiVersion: v1
-kind: ConfigMap
+kind: Namespace
 metadata:
-  name: oauth-configmap
-  namespace: mep
-data:
-  oauth-server-url: oauth-service
-  oauth-server-port: "5001"
+  name: {{ .Values.namespace }}

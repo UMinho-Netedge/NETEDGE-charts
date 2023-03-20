@@ -1,0 +1,84 @@
+nameoverride: ""
+
+appName: "netedge-mep"
+namespace: "netedge-host"
+appInstanceId: "netedge-host-12321"
+
+mongo:
+  name: mongo
+  image: mongo
+  storage: 1Gi
+  replicas: 1
+  user: bmV0ZWRnZQ==
+  password: TUVDXCFtMG5nMA==
+  database: mep
+  imagePullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 27017
+
+mepserver:
+  name: mepserver
+  image: uminhonetedge/mep:1.1.4
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 8080
+    targetPort: 8080
+  ingress:
+    url: mp1.netedge-mep.com
+
+mepconfig:
+  name: mepconfig
+  image: uminhonetedge/mm5:1.1.0
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 8085
+    targetPort: 8085
+  ingress:
+    url: mm5.netedge-mep.com
+
+auth:
+  name: auth
+  image: arom98/auth-server:6.7
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 5001
+    targetPort: 5001
+
+dnsapi:
+  name: dnsapi
+  image: uminhonetedge/coredns_api:1.1.0
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 8082
+    targetPort: 8082
+
+coredns:
+  name: coredns
+  image: coredns/coredns:1.10.0
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 1053
+    targetPort: 1053
+
+mongoexpress:
+  name: mongoexpress
+  image: mongo-express
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 8081
+    targetPort: 8081
+  ingress:
+    url: mongoexpress.netedge-mep.com
