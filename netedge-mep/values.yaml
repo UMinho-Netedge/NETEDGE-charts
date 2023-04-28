@@ -1,7 +1,6 @@
 nameoverride: ""
 
 appName: "netedge-mep"
-namespace: "netedge-host"
 appInstanceId: "netedge-host-12321"
 
 mongo:
