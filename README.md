@@ -6,7 +6,8 @@ For more information on NetEdge, please check https://www.netedge.pt/
 
 The repository contains:
 
-- The NetEdge-MEP: a CNF-based ETSI-MEC compliant MEP.
+### NetEdge-MEP
+The NetEdge-MEP: a CNF-based ETSI-MEC compliant MEP.
 
 The NetEdge-MEP micro-service architecture is composed of:
 
@@ -26,14 +27,14 @@ If you use it, please refer to: xxx
 # How to install
 
 You should first have a Kubernetes cluster configured and helm v3 installed to run it.
-The NetEdge MEP also requires two persistent volumes with at least 1GB each.
+The NetEdge-MEP also requires two persistent volumes with at least 1GB each.
 The volumes should have storage classes mongodb-class and dns-class.
 
 ## Using it as a helm chart repository
 
 ### Add as a helm repository
 ```bash
-helm repo add netedge-mep https://uminho-netedge.github.io/NETEDGE-charts/
+helm repo add netedge-charts https://uminho-netedge.github.io/NETEDGE-charts/
 ```
 ### Installing the chart
 ```bash
@@ -56,7 +57,7 @@ helm install NetEdge-MEP <chart_name>
 ## Using it as a Network Service in ETSI Open Source MANO (OSM)
 ### Add the helm repository in OSM k8s Repos
 ```bash
-osm repo-add --type helm-chart --description "UMinho NetEdge Repo" netedge-mep https://uminho-netedge.github.io/NetEdge-MEP/
+osm repo-add --type helm-chart --description "UMinho NetEdge Repo" netedge-mep https://uminho-netedge.github.io/NETEDGE-charts/
 ```
 ### Create the KNF and NS in OSM
 Download the files netedge-mep_knf.tar.gz and netedge-mep_ns.tar.gz of this repository and use them to create the packages on OSM
