@@ -1,0 +1,16 @@
+nameoverride: ""
+
+appName: "test"
+appInstanceId: "test"
+
+test:
+  name: test
+  image: uminhonetedge/test:1.0
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: NodePort
+    port: 8080
+    targetPort: 8080
+    nodePort: 30015
+
