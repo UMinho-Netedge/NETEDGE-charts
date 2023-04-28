@@ -44,6 +44,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Values.appInstanceId }}
   name: {{ .Values.mongo.name }}-statefulset
 spec:
+  serviceName: {{ .Values.mongo.name }}-service
   replicas: {{ .Values.mongo.replicas }}
   selector:
     matchLabels:

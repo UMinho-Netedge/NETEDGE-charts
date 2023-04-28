@@ -19,6 +19,7 @@ metadata:
     app: {{ .Values.coredns.name }}
   name: coredns-statefulset
 spec:
+  serviceName: {{ .Values.coredns.name }}-service
   replicas: 1
   selector:
     matchLabels:
