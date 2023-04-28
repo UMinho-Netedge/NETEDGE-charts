@@ -16,3 +16,24 @@ entries:
     urls:
     - https://github.com/UMinho-Netedge/NETEDGE-charts/raw/main/netedge-mep/netedge-mep-0.1.2.tgz
     version: 1.0.0
+
+  test:
+  - apiVersion: v1
+    description: A test chart with a Flask server
+    home: https://github.com/UMinho-Netedge/NETEDGE-charts
+    keywords:
+    - netedge
+      test
+    maintainers:
+    - email: viniciusferreira@algoritmi.uminho.pt
+      name: Vinicius Ferreira
+    name: test
+    sources:
+    - https://github.com/UMinho-Netedge/NETEDGE-charts/tree/main/test
+    urls:
+    - https://github.com/UMinho-Netedge/NETEDGE-charts/raw/main/test/test-0.1.0.tgz
+    version: 1.0.0
+    
+
+
+
