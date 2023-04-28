@@ -18,7 +18,6 @@ metadata:
   labels:
     app: {{ .Values.coredns.name }}
   name: coredns-statefulset
-  namespace: {{ .Values.namespace }}
 spec:
   replicas: 1
   selector:
@@ -28,7 +27,6 @@ spec:
     metadata:
       labels:
         app: {{ .Values.coredns.name }}
-      namespace: {{ .Values.namespace }}
     spec:
       containers:
         - name: {{ .Values.coredns.name }}
@@ -53,7 +51,6 @@ metadata:
   labels:
     app: {{ .Values.coredns.name }}
   name: {{ .Values.coredns.name }}-service
-  namespace: {{ .Values.namespace }}
 spec:
   type: {{ .Values.coredns.service.type }}
   ports:

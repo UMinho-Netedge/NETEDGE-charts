@@ -16,7 +16,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Values.dnsapi.name }}-configmap
-  namespace: {{ .Values.namespace }}
 data:
   dnsapi-server-url: "{{ .Values.dnsapi.name }}-service"
   dnsapi-server-port: "{{ .Values.dnsapi.service.port }}"
@@ -26,7 +25,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.dnsapi.name }}-deployment
-  namespace: {{ .Values.namespace }}
   labels:
     app: {{ .Values.dnsapi.name }}
 spec:
@@ -36,7 +34,6 @@ spec:
       app: {{ .Values.dnsapi.name }}
   template:
     metadata:
-      namespace: {{ .Values.namespace }}
       labels:
         app: {{ .Values.dnsapi.name }}
     spec:
@@ -60,7 +57,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.dnsapi.name }}-service
-  namespace: {{ .Values.namespace }}
   labels:
     app: {{ .Values.dnsapi.name }}
 spec:
@@ -79,7 +75,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Values.dnsapi.name }}-pvc
-  namespace: {{ .Values.namespace }}
 spec:
   storageClassName: {{ .Values.dnsapi.name }}-class
   accessModes:
