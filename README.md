@@ -1,7 +1,12 @@
-# NetEdge-MEP
-The NetEdge-MEP is a CNF-based ETSI-MEC compliant MEP.
+# NetEdge-charts
+NetEdge charts is the helm charts repository for ETSI-MEC compliant functional elements developed by UMinho on the NETEDGE Project.
+For more information on NetEdge, please check https://www.netedge.pt/
 
-NetEdge-MEP is part of NetEdge project, for more information on NetEdge, please check https://www.netedge.pt/
+## Charts
+
+The repository contains:
+
+- The NetEdge-MEP: a CNF-based ETSI-MEC compliant MEP.
 
 The NetEdge-MEP micro-service architecture is composed of:
 
@@ -28,11 +33,11 @@ The volumes should have storage classes mongodb-class and dns-class.
 
 ### Add as a helm repository
 ```bash
-helm repo add netedge-mep https://uminho-netedge.github.io/NetEdge-MEP/
+helm repo add netedge-mep https://uminho-netedge.github.io/NETEDGE-charts/
 ```
 ### Installing the chart
 ```bash
-helm install <chart-name> netedge-mep/netedge-mep
+helm install <chart-name> netedge-charts/netedge-mep
 ```
 
 
