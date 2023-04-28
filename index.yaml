@@ -16,7 +16,6 @@ entries:
     urls:
     - https://github.com/UMinho-Netedge/NETEDGE-charts/raw/main/netedge-mep/netedge-mep-0.1.2.tgz
     version: 1.0.0
-
   test:
   - apiVersion: v1
     description: A test chart with a Flask server
