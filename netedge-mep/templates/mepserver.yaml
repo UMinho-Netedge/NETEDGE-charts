@@ -16,7 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.mepserver.name }}-deployment
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.mepserver.name }}
 spec:
@@ -26,7 +26,7 @@ spec:
       app: {{ .Values.mepserver.name }}
   template:
     metadata:
-      namespace: {{ .Values.namespace }}
+      namespace: {{ .Release.Namespace }}
       labels:
         app: {{ .Values.mepserver.name }}
     spec:
@@ -89,7 +89,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.mepserver.name }}-service
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.mepserver.name }}
 spec:
@@ -108,7 +108,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: {{ .Values.mepserver.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -133,4 +133,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: default
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}

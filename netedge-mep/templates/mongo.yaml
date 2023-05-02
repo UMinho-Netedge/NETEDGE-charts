@@ -16,7 +16,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mongodb-configmap
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/name: {{ .Values.appName }}
     app.kubernetes.io/instance: {{ .Values.appInstanceId }}
@@ -29,7 +29,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: mongodb-secret
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/name: {{ .Values.appName }}
     app.kubernetes.io/instance: {{ .Values.appInstanceId }}
@@ -45,7 +45,7 @@ metadata:
     app.kubernetes.io/name: {{ .Values.mongo.name }}
     app.kubernetes.io/instance: {{ .Values.appInstanceId }}
   name: {{ .Values.mongo.name }}-statefulset
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   serviceName: {{ .Values.mongo.name }}-service
   replicas: {{ .Values.mongo.replicas }}
@@ -58,7 +58,7 @@ spec:
       labels:
         app.kubernetes.io/name: {{ .Values.mongo.name }}
         app.kubernetes.io/instance: {{ .Values.appInstanceId }}
-      namespace: {{ .Values.namespace }}
+      namespace: {{ .Release.Namespace }}
     spec:
       containers:
       - image: "{{ .Values.mongo.image }}"
@@ -92,7 +92,7 @@ metadata:
     app.kubernetes.io/name: {{ .Values.mongo.name }} 
     app.kubernetes.io/instance: {{ .Values.appInstanceId }}
   name: {{ .Values.mongo.name }}-service
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
   - protocol: TCP
@@ -107,7 +107,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Values.mongo.name }}-pvc
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   storageClassName: {{ .Values.mongo.name }}-class
   accessModes:
