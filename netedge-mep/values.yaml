@@ -25,7 +25,7 @@ mepserver:
     type: NodePort
     port: 8080
     targetPort: 8080
-    nodePort: 30000
+    nodePort: 30050
   # ingress:
   #   url: mp1.netedge-mep.com
 
@@ -38,7 +38,7 @@ mepconfig:
     type: NodePort
     port: 8085
     targetPort: 8085
-    nodePort: 30001
+    nodePort: 30051
   # ingress:
   #   url: mm5.netedge-mep.com
 
@@ -71,7 +71,7 @@ coredns:
     type: NodePort
     port: 1053
     targetPort: 1053
-    nodePort: 30002
+    nodePort: 30052
 
 mongoexpress:
   name: mongoexpress
