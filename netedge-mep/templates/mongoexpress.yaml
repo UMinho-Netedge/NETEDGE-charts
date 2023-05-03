@@ -12,6 +12,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
+{{- if .Values.mongoexpress }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -82,3 +83,4 @@ spec:
     targetPort: {{ .Values.mongoexpress.service.targetPort }}
     nodePort: {{ .Values.mongoexpress.service.nodePort }}
   type: {{ .Values.mongoexpress.service.type }}
+{{ end }}
