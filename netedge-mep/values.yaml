@@ -20,7 +20,6 @@ mepserver:
   name: mepserver
   image: uminhonetedge/mep:1.1.15
   imagePullPolicy: Always
-  replicas: 1
   service:
     type: NodePort
     port: 8080
