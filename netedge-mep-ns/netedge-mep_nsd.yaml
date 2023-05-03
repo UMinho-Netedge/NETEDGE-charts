@@ -1,0 +1,22 @@
+nsd:
+  nsd:
+  - description: NetEdge-MEP is a KNF-based ETSI-compliant MEP developed by UMinho
+    designer: ALGORITMI-UMinho
+    df:
+    - id: default-df
+      vnf-profile:
+      - id: netedge-mep
+        virtual-link-connectivity:
+        - constituent-cpd-id:
+          - constituent-base-element-id: netedge-mep
+            constituent-cpd-id: mgmt-ext
+          virtual-link-profile-id: mgmtnet
+        vnfd-id: netedge-mep_knf
+    id: netedge-mep_ns
+    name: netedege-mep_ns
+    version: 1.0
+    virtual-link-desc:
+    - id: mgmtnet
+      mgmt-network: true
+    vnfd-id:
+    - netedge-mep_knf
