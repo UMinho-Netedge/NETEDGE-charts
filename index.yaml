@@ -48,6 +48,21 @@ entries:
     urls:
     - https://github.com/UMinho-Netedge/NETEDGE-charts/raw/tests/netedge-mep/netedge-mep-0.1.3.tgz
     version: 1.0.0    
-
+  it-mep-tests:
+  - apiVersion: v1
+    description: IT's MEP Helm chart for Kubernetes
+    home: https://github.com/ATNoG/netedge-mep
+    keywords:
+    - netedge
+      mep
+    maintainers:
+    - email: escaleira@av.it.pt
+      name:  Pedro Escaleira
+    name: it-mep
+    sources:
+    - https://github.com/ATNoG/netedge-mep
+    urls:
+    - https://github.com/UMinho-Netedge/NETEDGE-charts/raw/tests/it-mep/mepchart-0.1.0.tgz
+    version: 1.0.0   
 
 
