@@ -19,7 +19,7 @@ mep:
   internalPort: 8080
   filePath: "/home/netedge/main.py"
   args:
-    mongodb_addr: "127.0.0.1"
+    mongodb_addr: "mongodb_k8s"
     mongodb_port: "27017"
     mongodb_database: "mep"
     mongodb_password: "admin"
@@ -69,3 +69,17 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+
+mongo:
+  name: mongodb-k8s
+  image: mongo
+  storage: 1Gi
+  replicas: 1
+  user: YWRtaW4=
+  password: YWRtaW4=
+  database: mep
+  imagePullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 27017
