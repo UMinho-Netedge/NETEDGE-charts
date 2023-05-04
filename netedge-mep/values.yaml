@@ -73,15 +73,3 @@ coredns:
     targetPort: 1053
     nodePort: 30052
 
-mongoexpress:
-  name: mongoexpress
-  image: mongo-express
-  imagePullPolicy: Always
-  replicas: 1
-  service:
-    type: NodePort
-    port: 8081
-    targetPort: 8081
-    nodePort: 30003
-  # ingress:
-  #   url: mongoexpress.netedge-mep.com
