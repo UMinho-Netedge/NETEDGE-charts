@@ -6,10 +6,10 @@ replicaCount: 1
 
 image:
   # this should be from the ATNOG/netedge-mep repository
-  repository: uminhonetedge/it-mep-test:1.0
+  repository: uminhonetedge/it-mep-test
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "1.0"
 
 imagePullSecrets: []
 nameOverride: ""
