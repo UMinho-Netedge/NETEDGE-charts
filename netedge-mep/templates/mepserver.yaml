@@ -16,7 +16,6 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: {{ .Values.mepserver.name }}-deployment
-  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.mepserver.name }}
 spec:
@@ -25,10 +24,11 @@ spec:
       app: {{ .Values.mepserver.name }}
   template:
     metadata:
-      namespace: {{ .Release.Namespace }}
       labels:
         app: {{ .Values.mepserver.name }}
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.controller_name }}
       containers:
       - name: {{ .Values.mepserver.name }}
         image: "{{ .Values.mepserver.image }}"
@@ -87,7 +87,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.mepserver.name }}-service
-  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.mepserver.name }}
 spec:
@@ -107,7 +106,6 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: {{ .Values.mepserver.name }}
-  namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

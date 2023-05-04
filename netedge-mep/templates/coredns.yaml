@@ -29,6 +29,8 @@ spec:
       labels:
         app: {{ .Values.coredns.name }}
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.controller_name }}
       containers:
         - name: {{ .Values.coredns.name }}
           image: {{ .Values.coredns.image }}
