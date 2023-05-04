@@ -13,13 +13,12 @@
 #     limitations under the License.
 
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: {{ .Values.mepserver.name }}-deployment
   labels:
     app: {{ .Values.mepserver.name }}
 spec:
-  replicas: {{ .Values.mepserver.replicas }}
   selector:
     matchLabels:
       app: {{ .Values.mepserver.name }}
@@ -82,7 +81,6 @@ spec:
                 name: dnsapi-configmap
                 key: dnsapi-server-port                
       restartPolicy: Always
-status: {}
 
 ---
 apiVersion: v1
@@ -101,6 +99,7 @@ spec:
     targetPort: {{ .Values.mepserver.service.targetPort }}
     nodePort: {{ .Values.mepserver.service.nodePort }}
   type: {{ .Values.mepserver.service.type }}
+  internalTrafficPolicy: Local      # to force other Pods in the same Node to contact the MEP Server Pod in that Node
 
 ---
 apiVersion: v1
