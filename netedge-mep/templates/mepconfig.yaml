@@ -30,6 +30,8 @@ spec:
     spec:
       serviceAccountName: {{ .Values.mepconfig.name }}
       automountServiceAccountToken: true
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.controller_name }}
       containers:
       - name: {{ .Values.mepconfig.name }}
         image: "{{ .Values.mepconfig.image }}"

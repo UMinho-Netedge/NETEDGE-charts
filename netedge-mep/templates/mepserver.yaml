@@ -27,8 +27,6 @@ spec:
       labels:
         app: {{ .Values.mepserver.name }}
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: {{ .Values.controller_name }}
       containers:
       - name: {{ .Values.mepserver.name }}
         image: "{{ .Values.mepserver.image }}"
