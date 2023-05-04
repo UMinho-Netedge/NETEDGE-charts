@@ -13,22 +13,9 @@
 #     limitations under the License.
 
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mongodb-configmap
-  namespace: {{ .Release.Namespace }}
-  labels:
-    app.kubernetes.io/name: {{ .Values.appName }}
-    app.kubernetes.io/instance: {{ .Values.appInstanceId }}
-data:
-  database_url: "{{ .Values.mongo.name }}"
-  database_port: "{{ .Values.mongo.service.port }}"
-  database_name: "{{ .Values.mongo.database }}"
----
-apiVersion: v1
 kind: Secret
 metadata:
-  name: mongodb-secret
+  name: mongodb-k8s-secret
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/name: {{ .Values.appName }}
@@ -69,18 +56,18 @@ spec:
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               secretKeyRef:
-                name: mongodb-secret
+                name: {{ .Values.mongo.name }}-secret
                 key: mongodb_username
           - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: mongodb-secret
+                name: {{ .Values.mongo.name }}-secret
                 key: mongodb_password     
         volumeMounts:
-        - name: mongodb-storage
+        - name: mongodb-k8s-storage
           mountPath: /{{ .Values.appInstanceId }}/mongodb
       volumes:
-        - name: mongodb-storage
+        - name: mongodb-k8s-storage
           persistentVolumeClaim:
             claimName: {{ .Values.mongo.name }}-pvc
       restartPolicy: Always
@@ -130,4 +117,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/tmp/{{ .Values.appInstanceId }}/mongodb/"
+    path: "/tmp/{{ .Values.mongo.name }}/mongodb/"
