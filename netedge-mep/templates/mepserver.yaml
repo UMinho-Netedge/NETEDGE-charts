@@ -30,6 +30,8 @@ spec:
       labels:
         app: {{ .Values.mepserver.name }}
     spec:
+      serviceAccountName: {{ .Values.mepserver.name }}
+      automountServiceAccountToken: true
       containers:
       - name: {{ .Values.mepserver.name }}
         image: "{{ .Values.mepserver.image }}"
@@ -100,7 +102,6 @@ spec:
     protocol: TCP
     port: {{ .Values.mepserver.service.port }}
     targetPort: {{ .Values.mepserver.service.targetPort }}
-    nodePort: {{ .Values.mepserver.service.nodePort }}
   type: {{ .Values.mepserver.service.type }}
 
 ---
@@ -132,5 +133,5 @@ roleRef:
   name: {{ .Values.mepserver.name }}-role
 subjects:
 - kind: ServiceAccount
-  name: default
+  name: {{ .Values.mepserver.name }}
   namespace: {{ .Release.Namespace }}
