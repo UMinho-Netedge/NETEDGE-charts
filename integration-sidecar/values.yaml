@@ -5,7 +5,7 @@ appInstanceId: "997fc80a-cfc1-498a-b77f-608f09506e86"
 
 sidecar:
   name: sidecar
-  image: uminhonetedge/integration-sidecar:1.0
+  image: uminhonetedge/integration-sidecar:1.0.1
   imagePullPolicy: Always
   replicas: 1
   service:
