@@ -48,7 +48,7 @@ spec:
           - name: MEP_hostname
             value: mepserver-service
           - name: MEP_port
-            value: 8080            
+            value: "8080"            
       restartPolicy: Always
 status: {}
 
