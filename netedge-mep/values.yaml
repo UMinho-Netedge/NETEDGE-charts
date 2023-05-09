@@ -23,16 +23,13 @@ mepserver:
   image: uminhonetedge/mep:1.1.15
   imagePullPolicy: Always
   service:
-    type: NodePort
+    type: ClusterIP
     port: 8080
     targetPort: 8080
-    nodePort: 30050
-  # ingress:
-  #   url: mp1.netedge-mep.com
 
 mepconfig:
   name: mepconfig
-  image: uminhonetedge/mm5:1.1.2
+  image: uminhonetedge/mm5:1.1.3
   imagePullPolicy: Always
   replicas: 1
   service:
@@ -40,8 +37,6 @@ mepconfig:
     port: 8085
     targetPort: 8085
     nodePort: 30051
-  # ingress:
-  #   url: mm5.netedge-mep.com
 
 auth:
   name: auth
