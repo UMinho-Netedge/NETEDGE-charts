@@ -52,7 +52,7 @@ spec:
         volumeMounts:
           - name: podinfo
             mountPath: /etc/podinfo   
-      restartPolicy: OnFailure
+      restartPolicy: Always
       volumes:
       - name: podinfo
         downwardAPI:
