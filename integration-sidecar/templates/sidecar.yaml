@@ -46,9 +46,9 @@ spec:
           - name: appPort
             value: "{{ .Values.sidecar.service.port }}"
           - name: MEP_hostname
-            value: mepserver-service
+            value: {{ .Values.sidecar.mep.hostname }}
           - name: MEP_port
-            value: "8080"            
+            value: "{{ .Values.sidecar.mep.port }}"            
       restartPolicy: Always
 status: {}
 

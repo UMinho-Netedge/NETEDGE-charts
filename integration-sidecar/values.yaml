@@ -12,4 +12,7 @@ sidecar:
     type: ClusterIP
     port: 8080
     targetPort: 8080
+  mep:
+    hostname: mepserver-service
+    port: 8080
 
