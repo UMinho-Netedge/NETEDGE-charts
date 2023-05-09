@@ -19,19 +19,16 @@ metadata:
   namespace: {{ .Release.namespace }}
   labels:
     app.kubernetes.io/name: {{ .Values.appName }}
-    app.kubernetes.io/instance: {{ .Values.appInstanceId }}
 spec:
   replicas: {{ .Values.sidecar.replicas }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Values.appName }}
-      app.kubernetes.io/instance: {{ .Values.appInstanceId }}
   template:
     metadata:
       namespace: {{ .Release.namespace }}
       labels:
         app.kubernetes.io/name: {{ .Values.appName }}
-        app.kubernetes.io/instance: {{ .Values.appInstanceId }}
     spec:
       containers:
       - name: {{ .Values.sidecar.name }}
@@ -73,11 +70,9 @@ metadata:
   namespace: {{ .Release.namespace }}
   labels:
     app.kubernetes.io/name: {{ .Values.appName }}
-    app.kubernetes.io/instance: {{ .Values.appInstanceId }}
 spec:
   selector:
     app.kubernetes.io/name: {{ .Values.appName }}
-    app.kubernetes.io/instance: {{ .Values.appInstanceId }}
   ports:
   - name: {{ .Values.sidecar.name }}
     protocol: TCP
