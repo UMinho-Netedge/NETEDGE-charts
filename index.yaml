@@ -64,5 +64,20 @@ entries:
     urls:
     - https://github.com/UMinho-Netedge/NETEDGE-charts/raw/tests/it-mep/mepchart-0.1.0.tgz
     version: 1.0.0   
-
+  integration-sidecar:
+  - apiVersion: v1
+    description: A sidecar to interact with NETEDGE MEP.
+    home: https://github.com/ATNoG/netedge-integration
+    keywords:
+    - netedge
+      sidecar
+    maintainers:
+    - email: viniciusferreira@algoritmi.uminho.pt
+      name: Vinicius Ferreira
+    name: integration-sidecar
+    sources:
+    - https://github.com/UMinho-Netedge/NETEDGE-charts/tree/tests/integration-sidecar
+    urls:
+    - https://github.com/UMinho-Netedge/NETEDGE-charts/raw/tests/integration-sidecar/integration-sidecar-0.1.0.tgz
+    version: 1.0.0 
 
