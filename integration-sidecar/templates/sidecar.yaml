@@ -44,7 +44,7 @@ spec:
           - name: appHostname
             value: {{ .Values.sidecar.name }}-service
           - name: appPort
-            value: {{ .Values.sidecar.service.port }}
+            value: "{{ .Values.sidecar.service.port }}"
           - name: MEP_hostname
             value: mepserver-service
           - name: MEP_port
