@@ -48,8 +48,21 @@ spec:
           - name: MEP_hostname
             value: {{ .Values.sidecar.mep.hostname }}
           - name: MEP_port
-            value: "{{ .Values.sidecar.mep.port }}"            
-      restartPolicy: Always
+            value: "{{ .Values.sidecar.mep.port }}"         
+        volumeMounts:
+          - name: podinfo
+            mountPath: /etc/podinfo   
+      restartPolicy: OnFailure
+      volumes:
+      - name: podinfo
+        downwardAPI:
+          items:
+            - path: "labels"
+              fieldRef:
+                fieldPath: metadata.labels
+            - path: "annotations"
+              fieldRef:
+                fieldPath: metadata.annotations
 status: {}
 
 ---
