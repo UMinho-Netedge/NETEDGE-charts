@@ -4,7 +4,7 @@ appName: "sidecar"
 
 sidecar:
   name: sidecar
-  image: uminhonetedge/integration-sidecar:1.0.4
+  image: uminhonetedge/integration-sidecar:1.0.5
   imagePullPolicy: Always
   replicas: 1
   service:
