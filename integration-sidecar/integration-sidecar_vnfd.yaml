@@ -1,0 +1,18 @@
+vnfd:
+  description: This is a integration-sidecar KNF with a Flask server
+  df:
+  - id: default-df
+  ext-cpd:
+  - id: mgmt-ext
+    k8s-cluster-net: mgmtnet
+  id: integration-sidecar_knf
+  k8s_cluster:
+    nets:
+    - id: mgmtnet
+  kdu:
+  - name: integration-sidecar_knf
+    helm-chart: netedge-charts/integration-sidecar
+  mgmt-cp: mgmt-ext
+  product-name: integration-sidecar_knf
+  provider: Algoritmi-UMinho
+  version: 1.0

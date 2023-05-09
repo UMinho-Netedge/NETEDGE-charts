@@ -1,0 +1,22 @@
+nsd:
+  nsd:
+  - description: This is a integration-sidecar NS with the integration-sidecar_knf - an Mp1 integration test
+    designer: ALGORITMI-UMinho
+    df:
+    - id: default-df
+      vnf-profile:
+      - id: integration-sidecar
+        virtual-link-connectivity:
+        - constituent-cpd-id:
+          - constituent-base-element-id: integration-sidecar
+            constituent-cpd-id: mgmt-ext
+          virtual-link-profile-id: mgmtnet
+        vnfd-id: integration-sidecar_knf
+    id: integration-sidecar_ns
+    name: integration-sidecar_ns
+    version: 1.0
+    virtual-link-desc:
+    - id: mgmtnet
+      mgmt-network: true
+    vnfd-id:
+    - integration-sidecar_knf

@@ -1,0 +1,22 @@
+nsd:
+  nsd:
+  - description: This is a test NS with the test_knf - a simple flask server
+    designer: ALGORITMI-UMinho
+    df:
+    - id: default-df
+      vnf-profile:
+      - id: test
+        virtual-link-connectivity:
+        - constituent-cpd-id:
+          - constituent-base-element-id: test
+            constituent-cpd-id: mgmt-ext
+          virtual-link-profile-id: mgmtnet
+        vnfd-id: test_knf
+    id: test_ns
+    name: test_ns
+    version: 1.0
+    virtual-link-desc:
+    - id: mgmtnet
+      mgmt-network: true
+    vnfd-id:
+    - test_knf

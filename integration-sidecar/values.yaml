@@ -1,0 +1,15 @@
+nameoverride: ""
+
+appName: "integration-sidecar"
+appInstanceId: "997fc80a-cfc1-498a-b77f-608f09506e86"
+
+integration-sidecar:
+  name: integration-sidecar
+  image: uminhonetedge/integration-sidecar:1.0
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 8080
+    targetPort: 8080
+
