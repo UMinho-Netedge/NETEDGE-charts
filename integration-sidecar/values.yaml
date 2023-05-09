@@ -1,10 +1,10 @@
 nameoverride: ""
 
-appName: "integration-sidecar"
+appName: "sidecar"
 appInstanceId: "997fc80a-cfc1-498a-b77f-608f09506e86"
 
-integration-sidecar:
-  name: integration-sidecar
+sidecar:
+  name: sidecar
   image: uminhonetedge/integration-sidecar:1.0
   imagePullPolicy: Always
   replicas: 1

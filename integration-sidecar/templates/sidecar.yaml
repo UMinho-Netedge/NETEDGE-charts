@@ -15,13 +15,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.integration-sidecar.name }}-deployment
+  name: {{ .Values.sidecar.name }}-deployment
   namespace: {{ .Release.namespace }}
   labels:
     app.kubernetes.io/name: {{ .Values.appName }}
     app.kubernetes.io/instance: {{ .Values.appInstanceId }}
 spec:
-  replicas: {{ .Values.integration-sidecar.replicas }}
+  replicas: {{ .Values.sidecar.replicas }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Values.appName }}
@@ -34,17 +34,17 @@ spec:
         app.kubernetes.io/instance: {{ .Values.appInstanceId }}
     spec:
       containers:
-      - name: {{ .Values.integration-sidecar.name }}
-        image: "{{ .Values.integration-sidecar.image }}"
+      - name: {{ .Values.sidecar.name }}
+        image: "{{ .Values.sidecar.image }}"
         ports:
-        - containerPort: {{ .Values.integration-sidecar.service.targetPort }}      
+        - containerPort: {{ .Values.sidecar.service.targetPort }}      
         env:
           - name: appInstanceId
             value:  {{ .Values.appInstanceId }}  
           - name: appHostname
-            value: {{ .Values.integration-sidecar.name }}-service
+            value: {{ .Values.sidecar.name }}-service
           - name: appPort
-            value: {{ .Values.integration-sidecar.service.port }}
+            value: {{ .Values.sidecar.service.port }}
           - name: MEP_hostname
             value: mepserver-service
           - name: MEP_port
@@ -56,7 +56,7 @@ status: {}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.integration-sidecar.name }}-service
+  name: {{ .Values.sidecar.name }}-service
   namespace: {{ .Release.namespace }}
   labels:
     app.kubernetes.io/name: {{ .Values.appName }}
@@ -66,10 +66,10 @@ spec:
     app.kubernetes.io/name: {{ .Values.appName }}
     app.kubernetes.io/instance: {{ .Values.appInstanceId }}
   ports:
-  - name: {{ .Values.integration-sidecar.name }}
+  - name: {{ .Values.sidecar.name }}
     protocol: TCP
-    port: {{ .Values.integration-sidecar.service.port }}
-    targetPort: {{ .Values.integration-sidecar.service.targetPort }}
-  type: {{ .Values.integration-sidecar.service.type }}
+    port: {{ .Values.sidecar.service.port }}
+    targetPort: {{ .Values.sidecar.service.targetPort }}
+  type: {{ .Values.sidecar.service.type }}
 
 
