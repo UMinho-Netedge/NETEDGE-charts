@@ -86,7 +86,7 @@ spec:
           - name: MEPCONFIG_SERVER
             value: {{ .Values.mepconfig.name }}-service
           - name: MEPCONFIG_PORT
-            value: {{ .Values.mepconfig.service.port }}
+            value: "{{ .Values.mepconfig.service.port }}"
       restartPolicy: Always
 status: {}
 
