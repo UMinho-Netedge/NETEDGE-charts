@@ -82,7 +82,11 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: dnsapi-configmap
-                key: dnsapi-server-port                
+                key: dnsapi-server-port     
+          - name: MEPCONFIG_SERVER
+            value: {{ .Values.mepconfig.name }}-service
+          - name: MEPCONFIG_PORT
+            value: "{{ .Values.mepconfig.service.port }}"                        
       restartPolicy: Always
 status: {}
 

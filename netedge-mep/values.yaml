@@ -20,7 +20,7 @@ mongo:
 
 mepserver:
   name: mepserver
-  image: uminhonetedge/mep:1.1.16
+  image: uminhonetedge/mep:1.2
   imagePullPolicy: Always
   service:
     type: ClusterIP
