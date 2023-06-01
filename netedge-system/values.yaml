@@ -41,7 +41,7 @@ auth:
     
 meao:
   name: meao
-  image: uminhonetedge/meao:1.0.1
+  image: uminhonetedge/meao:1.0.2
   imagePullPolicy: Always
   replicas: 1
   service:
