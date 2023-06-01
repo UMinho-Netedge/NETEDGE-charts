@@ -1,0 +1,18 @@
+vnfd:
+  description: NETEDGE MEPM, MEAO, and Proxy
+  df:
+  - id: default-df
+  ext-cpd:
+  - id: mgmt-ext
+    k8s-cluster-net: mgmtnet
+  id: netedge-system_knf
+  k8s_cluster:
+    nets:
+    - id: mgmtnet
+  kdu:
+  - name: netedge-system
+    helm-chart: netedge-system
+  mgmt-cp: mgmt-ext
+  product-name: netedge-system_knf
+  provider: Algoritmi-UMinho/ATNoG
+  version: 1.0
