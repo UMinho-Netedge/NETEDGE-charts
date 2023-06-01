@@ -16,6 +16,22 @@ entries:
     urls:
     - https://github.com/UMinho-Netedge/NETEDGE-charts/raw/main/netedge-mep/netedge-mep-0.1.3.tgz
     version: 1.0.0
+  netedge-system:
+  - apiVersion: v1
+    description: A Helm Chart for NetEdge System (UALCMP + OpenID + initial version of MEAO/MEPM) developed by ALGORITMI Research Centre - UMinho
+    home: https://github.com/UMinho-Netedge/NETEDGE-charts
+    keywords:
+    - netedge
+      system
+    maintainers:
+    - email: viniciusferreira@algoritmi.uminho.pt
+      name: Vinicius Ferreira
+    name: netedge-system
+    sources:
+    - https://github.com/UMinho-Netedge/NETEDGE-charts/tree/main/netedge-system
+    urls:
+    - https://github.com/UMinho-Netedge/NETEDGE-charts/raw/main/netedge-system/netedge-system-0.1.1.tgz
+    version: 1.0.0    
   test:
   - apiVersion: v1
     description: A test chart with a Flask server
