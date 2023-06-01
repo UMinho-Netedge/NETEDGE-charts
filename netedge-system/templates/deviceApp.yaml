@@ -12,44 +12,28 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: meao-configmap
-  labels:
-    name: {{ .Values.appName }}
-    instance: {{ .Values.appInstanceId }}
-  namespace: {{ .Values.namespace }}
-data:
-  meao-server-url: "{{ .Values.meao.name }}-service"
-  meao-server-port: "{{ .Values.meao.service.port }}"
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: {{ .Values.namespace }}
-  name: {{ .Values.meao.name }}-deployment
+  name: {{ .Values.deviceapp.name }}-deployment
   labels:
-    name: {{ .Values.meao.name }}
-    instance: {{ .Values.appInstanceId }}
+    app: {{ .Values.deviceapp.name }}
 spec:
-  replicas: {{ .Values.meao.replicas }}
+  replicas: {{ .Values.deviceapp.replicas }}
   selector:
     matchLabels:
-      name: {{ .Values.meao.name }}
-      instance: {{ .Values.appInstanceId }}
+      app: {{ .Values.deviceapp.name }}
   template:
     metadata:
-      labels:
-        name: {{ .Values.meao.name }}
-        instance: {{ .Values.appInstanceId }}
       namespace: {{ .Values.namespace }}
+      labels:
+        app: {{ .Values.deviceapp.name }}
     spec:
       containers:
-      - name: {{ .Values.meao.name }}
-        image: "{{ .Values.meao.image }}"
+      - name: {{ .Values.deviceapp.name }}
+        image: "{{ .Values.deviceapp.image }}"
         ports:
-        - containerPort: {{ .Values.meao.service.targetPort }}
+        - containerPort: {{ .Values.deviceapp.service.targetPort }}
         env:
           - name: ME_CONFIG_MONGODB_SERVER
             valueFrom:
@@ -71,12 +55,10 @@ spec:
               secretKeyRef:
                 name: mongodb-secret
                 key: mongodb_password
-          - name: ME_CONFIG_MONGODB_DATABASE
-            value: {{ .Values.meao.db }}
-          - name: PORT
-            value: "{{ .Values.meao.service.port }}"
-          - name: OSM_HOSTNAME
-            value: {{ .Values.meao.osm.hostname }}            
+          - name: UALCMP_SERVER
+            value: {{ .Values.mx2.name }}-service
+          - name: UALCMP_PORT
+            value: "{{ .Values.mx2.service.port }}"           
       restartPolicy: Always
 status: {}
 
@@ -84,17 +66,17 @@ status: {}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.meao.name }}-service
-  namespace: {{ .Values.namespace }}
+  name: {{ .Values.deviceapp.name }}-service
   labels:
-    name: {{ .Values.meao.name }}
-    instance: {{ .Values.appInstanceId }}
+    app: {{ .Values.deviceapp.name }}
 spec:
   selector:
-    name: {{ .Values.meao.name }}
-    instance: {{ .Values.appInstanceId }}
+    app: {{ .Values.deviceapp.name }}
   ports:
-  - protocol: TCP
-    port: {{ .Values.meao.service.port }}
-    targetPort: {{ .Values.meao.service.targetPort }}
-  type: {{ .Values.meao.service.type }}
+  - name: {{ .Values.deviceapp.name }}
+    protocol: TCP
+    port: {{ .Values.deviceapp.service.port }}
+    targetPort: {{ .Values.deviceapp.service.targetPort }}
+  type: {{ .Values.deviceapp.service.type }}
+
+---
