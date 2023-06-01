@@ -1,16 +1,16 @@
 nameoverride: ""
 
 appName: "netedge-proxy"
-namespace: "netedge-system"
 appInstanceId: "netedge-proxy-12321"
 
 mongo:
+  deploy: false
   name: mongo
   image: mongo
   storage: 1Gi
   replicas: 1
-  user: bmV0ZWRnZQ==
-  password: TUVDXCFtMG5nMA==
+  user: "" #bmV0ZWRnZQ==
+  password: "" # TUVDXCFtMG5nMA==
   imagePullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -50,18 +50,18 @@ meao:
     targetPort: 5002
   db: meao
   osm:
-    hostname: "192.168.86.210"
+    hostname: "nbi" # "192.168.86.210"
 
-mongoexpress:
-  name: mongoexpress
-  image: mongo-express
-  imagePullPolicy: Always
-  replicas: 1
-  service:
-    type: NodePort
-    port: 8081
-    targetPort: 8081
-    nodePort: 30001
-  ingress:
-    url: mongoexpress.netedge-proxy.com
+mongoexpress: false
+  # name: mongoexpress
+  # image: mongo-express
+  # imagePullPolicy: Always
+  # replicas: 1
+  # service:
+  #   type: NodePort
+  #   port: 8081
+  #   targetPort: 8081
+  #   nodePort: 30001
+  # ingress:
+  #   url: mongoexpress.netedge-proxy.com
 
