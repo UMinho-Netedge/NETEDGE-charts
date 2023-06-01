@@ -20,7 +20,7 @@ metadata:
     name: {{ .Values.appName }}
     instance: {{ .Values.appInstanceId }}
 data:
-  database_url: "{{ .Values.mongo.name }}-service"
+  database_url: "{{ .Values.mongo.name }}"
   database_port: "{{ .Values.mongo.service.port }}"
 ---
 apiVersion: v1
@@ -32,8 +32,8 @@ metadata:
     instance: {{ .Values.appInstanceId }}
 type: Opaque
 data:
-  mongodb_username: {{ .Values.mongo.user }}
-  mongodb_password: {{ .Values.mongo.password }}
+  mongodb_username: ''
+  mongodb_password: ''
 
 {{- if .Values.mongo.deploy }}
 ---

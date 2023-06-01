@@ -68,6 +68,8 @@ spec:
               secretKeyRef:
                 name: mongodb-secret
                 key: mongodb_password
+          - name: OSM_HOSTNAME
+            value: {{ .Values.auth.osm.hostname }}                
       restartPolicy: Always
 status: {}
 

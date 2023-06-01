@@ -5,12 +5,12 @@ appInstanceId: "netedge-proxy-12321"
 
 mongo:
   deploy: false
-  name: mongo
+  name: mongodb-k8s
   image: mongo
   storage: 1Gi
   replicas: 1
-  user: "" #bmV0ZWRnZQ==
-  password: "" # TUVDXCFtMG5nMA==
+  user: ''
+  password: ''
   imagePullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -18,12 +18,12 @@ mongo:
 
 mx2:
   name: mx2
-  image: uminhonetedge/mx2:1.2.4
+  image: uminhonetedge/mx2:1.2.5
   imagePullPolicy: Always
   replicas: 1
   service:
     type: NodePort
-    port: 8080
+    port: 5001
     targetPort: 5001
     nodePort: 30000
   ingress:
@@ -31,17 +31,19 @@ mx2:
 
 auth:
   name: auth
-  image: uminhonetedge/openid-server:1.0.54
+  image: uminhonetedge/openid-server:1.0.56
   imagePullPolicy: Always
   replicas: 1
   service:
     type: ClusterIP
     port: 5000
     targetPort: 5000
+  osm:
+    hostname: "nbi"    
     
 meao:
   name: meao
-  image: uminhonetedge/meao:1.0.2
+  image: uminhonetedge/meao:1.0.3
   imagePullPolicy: Always
   replicas: 1
   service:
@@ -54,7 +56,7 @@ meao:
 
 deviceapp:
   name: deviceapp
-  image: uminhonetedge/proxy_client:system
+  image: uminhonetedge/proxy_client:1.0.1
   imagePullPolicy: Always
   replicas: 1
   service:
@@ -85,4 +87,3 @@ mongoexpress: false
   #   nodePort: 30001
   # ingress:
   #   url: mongoexpress.netedge-proxy.com
-

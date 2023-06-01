@@ -103,4 +103,3 @@ spec:
 #               number: {{ .Values.mongoexpress.service.port }}
 #     host: {{ .Values.mongoexpress.ingress.url }}
 {{ end }}
-
