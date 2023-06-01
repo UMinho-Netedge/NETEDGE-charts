@@ -1,0 +1,100 @@
+# Copyright 2022 Centro ALGORITMI - University of Minho
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+#     Unless required by applicable law or agreed to in writing, software
+#     distributed under the License is distributed on an "AS IS" BASIS,
+#     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#     See the License for the specific language governing permissions and
+#     limitations under the License.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: meao-configmap
+  labels:
+    name: {{ .Values.appName }}
+    instance: {{ .Values.appInstanceId }}
+  namespace: {{ .Values.namespace }}
+data:
+  meao-server-url: "{{ .Values.meao.name }}-service"
+  meao-server-port: "{{ .Values.meao.service.port }}"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.meao.name }}-deployment
+  labels:
+    name: {{ .Values.meao.name }}
+    instance: {{ .Values.appInstanceId }}
+spec:
+  replicas: {{ .Values.meao.replicas }}
+  selector:
+    matchLabels:
+      name: {{ .Values.meao.name }}
+      instance: {{ .Values.appInstanceId }}
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.meao.name }}
+        instance: {{ .Values.appInstanceId }}
+      namespace: {{ .Values.namespace }}
+    spec:
+      containers:
+      - name: {{ .Values.meao.name }}
+        image: "{{ .Values.meao.image }}"
+        ports:
+        - containerPort: {{ .Values.meao.service.targetPort }}
+        env:
+          - name: ME_CONFIG_MONGODB_SERVER
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb-configmap
+                key: database_url
+          - name: ME_CONFIG_MONGODB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb-configmap
+                key: database_port
+          - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: mongodb_username
+          - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: mongodb_password
+          - name: ME_CONFIG_MONGODB_DATABASE
+            value: {{ .Values.meao.db }}
+          - name: PORT
+            value: {{ .Values.meao.service.port }}
+          - name: OSM_HOSTNAME
+            value: {{ .Values.meao.osm.hostname }}            
+      restartPolicy: Always
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.meao.name }}-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    name: {{ .Values.meao.name }}
+    instance: {{ .Values.appInstanceId }}
+spec:
+  selector:
+    name: {{ .Values.meao.name }}
+    instance: {{ .Values.appInstanceId }}
+  ports:
+  - protocol: TCP
+    port: {{ .Values.meao.service.port }}
+    targetPort: {{ .Values.meao.service.targetPort }}
+  type: {{ .Values.meao.service.type }}
