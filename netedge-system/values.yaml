@@ -41,7 +41,7 @@ auth:
     
 meao:
   name: meao
-  image: uminhonetedge/meao:1.0.1
+  image: uminhonetedge/meao:1.0.2
   imagePullPolicy: Always
   replicas: 1
   service:
@@ -51,6 +51,27 @@ meao:
   db: meao
   osm:
     hostname: "nbi" # "192.168.86.210"
+
+deviceapp:
+  name: deviceapp
+  image: uminhonetedge/proxy_client:system
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 5005
+    targetPort: 5005
+
+userapp:
+  name: userapp
+  image: uminhonetedge/proxy_client_ui:1.2.10
+  imagePullPolicy: Always
+  replicas: 1
+  service:
+    type: NodePort
+    port: 3000
+    targetPort: 3000
+    nodePort: 30001
 
 mongoexpress: false
   # name: mongoexpress
