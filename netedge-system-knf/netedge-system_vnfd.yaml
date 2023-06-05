@@ -12,6 +12,7 @@ vnfd:
   kdu:
   - name: netedge-system
     helm-chart: netedge-system
+    helm-version: v3
   mgmt-cp: mgmt-ext
   product-name: netedge-system_knf
   provider: Algoritmi-UMinho/ATNoG
