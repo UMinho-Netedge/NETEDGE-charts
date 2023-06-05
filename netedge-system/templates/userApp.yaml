@@ -35,9 +35,9 @@ spec:
         ports:
         - containerPort: {{ .Values.userapp.service.targetPort }}
         env:
-          - name: REACT_APP_API_URL
+          - name: REACT_APP_DEVICE_APP_HOSTNAME
             value: {{ .Values.deviceapp.name }}-service
-          - name: REACT_APP_REQUESTS
+          - name: REACT_APP_DEVICE_APP_PORT
             value: "{{ .Values.deviceapp.service.port }}"           
       restartPolicy: Always
 status: {}

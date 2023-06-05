@@ -66,7 +66,7 @@ deviceapp:
 
 userapp:
   name: userapp
-  image: uminhonetedge/proxy_client_ui:1.2.10
+  image: uminhonetedge/proxy_client_ui:1.2.11
   imagePullPolicy: Always
   replicas: 1
   service:
