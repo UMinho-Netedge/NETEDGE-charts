@@ -43,7 +43,7 @@ auth:
     
 meao:
   name: meao
-  image: uminhonetedge/meao:1.0.3
+  image: uminhonetedge/meao:1.0.5
   imagePullPolicy: Always
   replicas: 1
   service:
@@ -56,17 +56,18 @@ meao:
 
 deviceapp:
   name: deviceapp
-  image: uminhonetedge/proxy_client:1.0.1
+  image: uminhonetedge/proxy_client:1.0.8
   imagePullPolicy: Always
   replicas: 1
   service:
-    type: ClusterIP
+    type: NodePort
     port: 5005
     targetPort: 5005
+    nodePort: 30002
 
 userapp:
   name: userapp
-  image: uminhonetedge/proxy_client_ui:1.2.11
+  image: uminhonetedge/proxy_client_ui:1.2.12
   imagePullPolicy: Always
   replicas: 1
   service:

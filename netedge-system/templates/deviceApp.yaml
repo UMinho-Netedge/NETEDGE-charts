@@ -77,6 +77,7 @@ spec:
     protocol: TCP
     port: {{ .Values.deviceapp.service.port }}
     targetPort: {{ .Values.deviceapp.service.targetPort }}
+    nodePort: {{ .Values.deviceapp.service.nodePort }}
   type: {{ .Values.deviceapp.service.type }}
 
 ---
