@@ -43,7 +43,7 @@ auth:
     
 meao:
   name: meao
-  image: uminhonetedge/meao:1.0.5
+  image: uminhonetedge/meao:1.0.10
   imagePullPolicy: Always
   replicas: 1
   service:
@@ -67,7 +67,7 @@ deviceapp:
 
 userapp:
   name: userapp
-  image: uminhonetedge/proxy_client_ui:1.2.12
+  image: uminhonetedge/proxy_client_ui:1.2.18
   imagePullPolicy: Always
   replicas: 1
   service:

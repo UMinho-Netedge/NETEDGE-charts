@@ -12,68 +12,35 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: meao-configmap
-  labels:
-    name: {{ .Values.appName }}
-    instance: {{ .Values.appInstanceId }}
-data:
-  meao-server-url: "{{ .Values.meao.name }}-service"
-  meao-server-port: "{{ .Values.meao.service.port }}"
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.meao.name }}-deployment
+  name: {{ .Values.userapp.name }}-deployment
   labels:
-    name: {{ .Values.meao.name }}
-    instance: {{ .Values.appInstanceId }}
+    app: {{ .Values.userapp.name }}
 spec:
-  replicas: {{ .Values.meao.replicas }}
+  replicas: {{ .Values.userapp.replicas }}
   selector:
     matchLabels:
-      name: {{ .Values.meao.name }}
-      instance: {{ .Values.appInstanceId }}
+      app: {{ .Values.userapp.name }}
   template:
     metadata:
+      namespace: {{ .Values.namespace }}
       labels:
-        name: {{ .Values.meao.name }}
-        instance: {{ .Values.appInstanceId }}
+        app: {{ .Values.userapp.name }}
     spec:
       containers:
-      - name: {{ .Values.meao.name }}
-        image: "{{ .Values.meao.image }}"
+      - name: {{ .Values.userapp.name }}
+        image: "{{ .Values.userapp.image }}"
         ports:
-        - containerPort: {{ .Values.meao.service.targetPort }}
+        - containerPort: {{ .Values.userapp.service.targetPort }}
         env:
-          - name: ME_CONFIG_MONGODB_SERVER
+          - name: REACT_APP_DEVICE_APP_HOSTNAME
             valueFrom:
-              configMapKeyRef:
-                name: mongodb-configmap
-                key: database_url
-          - name: ME_CONFIG_MONGODB_PORT
-            valueFrom:
-              configMapKeyRef:
-                name: mongodb-configmap
-                key: database_port
-          - name: ME_CONFIG_MONGODB_ADMINUSERNAME
-            valueFrom:
-              secretKeyRef:
-                name: mongodb-secret
-                key: mongodb_username
-          - name: ME_CONFIG_MONGODB_ADMINPASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mongodb-secret
-                key: mongodb_password
-          - name: ME_CONFIG_MONGODB_DATABASE
-            value: {{ .Values.meao.db }}
-          - name: PORT
-            value: "{{ .Values.meao.service.port }}"
-          - name: OSM_HOSTNAME
-            value: {{ .Values.meao.osm.hostname }}            
+              fieldRef:
+                fieldPath: status.hostIP            
+          - name: REACT_APP_DEVICE_APP_PORT
+            value: "{{ .Values.deviceapp.service.nodePort }}"           
       restartPolicy: Always
 status: {}
 
@@ -81,16 +48,18 @@ status: {}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.meao.name }}-service
+  name: {{ .Values.userapp.name }}-service
   labels:
-    name: {{ .Values.meao.name }}
-    instance: {{ .Values.appInstanceId }}
+    app: {{ .Values.userapp.name }}
 spec:
   selector:
-    name: {{ .Values.meao.name }}
-    instance: {{ .Values.appInstanceId }}
+    app: {{ .Values.userapp.name }}
   ports:
-  - protocol: TCP
-    port: {{ .Values.meao.service.port }}
-    targetPort: {{ .Values.meao.service.targetPort }}
-  type: {{ .Values.meao.service.type }}
+  - name: {{ .Values.userapp.name }}
+    protocol: TCP
+    port: {{ .Values.userapp.service.port }}
+    targetPort: {{ .Values.userapp.service.targetPort }}
+    nodePort: {{ .Values.userapp.service.nodePort }}
+  type: {{ .Values.userapp.service.type }}
+
+---
