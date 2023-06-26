@@ -22,7 +22,11 @@ The NetEdge-MEP micro-service architecture is composed of:
 - DNS Service: provides service discovery by name, to access services produced and registered by MEC Apps. The DNS Service is composed of a DNS API that configures a CoreDNS server.
   - Source-code: https://github.com/UMinho-Netedge/dns_ext
 
-If you use it, please refer to: xxx
+If you use it, please refer to:
+
+Ferreira, V., Bastos, J., Martins, A., Araújo, P., Lori, N., Faria, J., Costa, A., López, H. (2023).
+NETEDGE MEP: A CNF-based Multi-access Edge Computing Platform. 
+ISCC 2023 Proceedings.
 
 # How to install
 
